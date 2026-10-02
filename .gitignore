@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+*.pyc
+__pycache__/
+
+# CDK
+infrastructure/cdk.out/
+infrastructure/*.js
+infrastructure/*.d.ts
+
+# Lambda
+lambda/layers/dependencies/python/
+
+# Environment
+.env
+.env.local
+
+# Build
+frontend/build/
+dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary
+/tmp/
+*.tmp
+
+# CDK cached context (contains account id)
+infrastructure/cdk.context.json
+cdk.context.json

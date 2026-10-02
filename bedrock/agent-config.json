@@ -1,0 +1,111 @@
+{
+  "agentName": "TextToSqlAgent",
+  "description": "Agent that converts natural language queries to SQL and executes them against a PostgreSQL database",
+  "foundationModel": "anthropic.claude-3-5-sonnet-20241022-v2:0",
+  "instruction": "You are a helpful SQL assistant that converts natural language questions into SQL queries and executes them against a sales database. The database contains information about customers, products, orders, and order items.\n\nWhen a user asks a question:\n1. First, get the database schema using the get-schema action to understand the available tables and columns\n2. Convert the natural language question into a valid SQL SELECT query\n3. Execute the query using the execute-query action\n4. Present the results in a clear, human-readable format\n5. If there's an error, explain what went wrong and suggest corrections\n\nAlways validate that your SQL queries are safe and only use SELECT statements. Never generate queries that modify data (INSERT, UPDATE, DELETE, DROP, etc.).\n\nBe conversational and helpful. If the user's question is ambiguous, ask for clarification.",
+  "idleSessionTTLInSeconds": 600,
+  "actionGroups": [
+    {
+      "actionGroupName": "DatabaseActions",
+      "description": "Actions for querying the sales database",
+      "actionGroupExecutor": {
+        "lambda": "LAMBDA_ARN_PLACEHOLDER"
+      },
+      "apiSchema": {
+        "payload": {
+          "openapi": "3.0.0",
+          "info": {
+            "title": "Sales Database API",
+            "version": "1.0.0",
+            "description": "API for querying sales database"
+          },
+          "paths": {
+            "/get-schema": {
+              "post": {
+                "summary": "Get database schema information",
+                "description": "Returns information about all tables and columns in the database",
+                "operationId": "getSchema",
+                "responses": {
+                  "200": {
+                    "description": "Schema information",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "object",
+                          "properties": {
+                            "success": {
+                              "type": "boolean"
+                            },
+                            "schema": {
+                              "type": "object"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "/execute-query": {
+              "post": {
+                "summary": "Execute a SQL query",
+                "description": "Executes a SELECT query against the database and returns results",
+                "operationId": "executeQuery",
+                "requestBody": {
+                  "required": true,
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "sql_query": {
+                            "type": "string",
+                            "description": "The SQL SELECT query to execute"
+                          }
+                        },
+                        "required": ["sql_query"]
+                      }
+                    }
+                  }
+                },
+                "responses": {
+                  "200": {
+                    "description": "Query results",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "object",
+                          "properties": {
+                            "success": {
+                              "type": "boolean"
+                            },
+                            "data": {
+                              "type": "array"
+                            },
+                            "row_count": {
+                              "type": "integer"
+                            },
+                            "columns": {
+                              "type": "array"
+                            },
+                            "query": {
+                              "type": "string"
+                            },
+                            "error": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

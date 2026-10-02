@@ -1,0 +1,11 @@
+product_id,product_name,category,price,stock_quantity,description,created_at
+1,Laptop Pro 15,Electronics,1299.99,50,High-performance laptop,2024-01-01 10:00:00
+2,Wireless Mouse,Electronics,29.99,200,Ergonomic wireless mouse,2024-01-01 10:00:00
+3,USB-C Cable,Accessories,12.99,500,6ft USB-C charging cable,2024-01-01 10:00:00
+4,Desk Chair,Furniture,249.99,30,Ergonomic office chair,2024-01-01 10:00:00
+5,Standing Desk,Furniture,599.99,15,Adjustable standing desk,2024-01-01 10:00:00
+6,Monitor 27",Electronics,349.99,75,4K UHD monitor,2024-01-01 10:00:00
+7,Keyboard Mechanical,Electronics,89.99,100,RGB mechanical keyboard,2024-01-01 10:00:00
+8,Webcam HD,Electronics,79.99,60,1080p webcam,2024-01-01 10:00:00
+9,Desk Lamp,Accessories,39.99,150,LED desk lamp,2024-01-01 10:00:00
+10,Notebook Set,Office Supplies,19.99,300,Pack of 3 notebooks,2024-01-01 10:00:00

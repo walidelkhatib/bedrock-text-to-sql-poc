@@ -1,0 +1,26 @@
+{
+  "name": "bedrock-text-to-sql-infrastructure",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc",
+    "deploy": "cdk deploy --all",
+    "destroy": "cdk destroy --all",
+    "synth": "cdk synth",
+    "seed-database": "ts-node scripts/seed-database.ts",
+    "build-layer": "../scripts/build-lambda-layer.sh"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/pg": "^8.16.0",
+    "aws-cdk": "^2.120.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cloudformation": "^3.450.0",
+    "@aws-sdk/client-secrets-manager": "^3.450.0",
+    "aws-cdk-lib": "^2.120.0",
+    "constructs": "^10.3.0",
+    "pg": "^8.11.3"
+  }
+}

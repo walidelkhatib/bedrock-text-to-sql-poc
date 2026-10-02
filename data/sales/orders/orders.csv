@@ -1,0 +1,11 @@
+order_id,customer_id,order_date,total_amount,status,shipping_address,shipping_city,shipping_state,shipping_zip
+1,1,2024-01-15 10:30:00,1329.98,delivered,123 Main St,San Francisco,CA,94102
+2,2,2024-01-16 14:20:00,279.98,delivered,456 Oak Ave,Los Angeles,CA,90001
+3,3,2024-01-17 09:15:00,849.98,shipped,789 Pine Rd,Seattle,WA,98101
+4,4,2024-01-18 16:45:00,599.99,processing,321 Elm St,Portland,OR,97201
+5,5,2024-01-19 11:30:00,169.97,delivered,654 Maple Dr,Austin,TX,78701
+6,1,2024-01-20 13:00:00,449.98,delivered,123 Main St,San Francisco,CA,94102
+7,2,2024-01-21 15:30:00,89.99,shipped,456 Oak Ave,Los Angeles,CA,90001
+8,6,2024-01-22 10:00:00,1299.99,processing,987 Cedar Ln,Denver,CO,80201
+9,7,2024-01-23 12:00:00,699.97,delivered,147 Birch Ct,Phoenix,AZ,85001
+10,8,2024-01-24 14:00:00,249.99,pending,258 Spruce Way,Miami,FL,33101
