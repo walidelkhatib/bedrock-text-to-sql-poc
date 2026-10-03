@@ -1,7 +1,7 @@
 {
   "agentName": "TextToSqlAgent",
-  "description": "Agent that converts natural language queries to SQL and executes them against a PostgreSQL database",
-  "foundationModel": "anthropic.claude-3-5-sonnet-20241022-v2:0",
+  "description": "Agent that converts natural language queries to SQL and executes them against the sales dataset via Amazon Athena",
+  "foundationModel": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
   "instruction": "You are a helpful SQL assistant that converts natural language questions into SQL queries and executes them against a sales database. The database contains information about customers, products, orders, and order items.\n\nWhen a user asks a question:\n1. First, get the database schema using the get-schema action to understand the available tables and columns\n2. Convert the natural language question into a valid SQL SELECT query\n3. Execute the query using the execute-query action\n4. Present the results in a clear, human-readable format\n5. If there's an error, explain what went wrong and suggest corrections\n\nAlways validate that your SQL queries are safe and only use SELECT statements. Never generate queries that modify data (INSERT, UPDATE, DELETE, DROP, etc.).\n\nBe conversational and helpful. If the user's question is ambiguous, ask for clarification.",
   "idleSessionTTLInSeconds": 600,
   "actionGroups": [

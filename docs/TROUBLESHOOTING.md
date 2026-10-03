@@ -40,9 +40,9 @@ cdk bootstrap aws://ACCOUNT-ID/REGION
 
 **Solution**:
 1. Go to AWS Console → Bedrock → Model access
-2. Request access to "Claude 3.5 Sonnet v2"
+2. Request access to "Claude Sonnet 4.5"
 3. Wait for approval (usually instant)
-4. Verify model ID: `anthropic.claude-3-5-sonnet-20241022-v2:0`
+4. Verify model ID: `us.anthropic.claude-sonnet-4-5-20250929-v1:0`
 
 ### Issue: Bedrock Not Available in Region
 

@@ -24,7 +24,7 @@ sed "s|LAMBDA_ARN_PLACEHOLDER|$LAMBDA_ARN|g" ../bedrock/agent-config.json > /tmp
 echo "Creating Bedrock Agent..."
 AGENT_ID=$(aws bedrock-agent create-agent \
   --agent-name "TextToSqlAgent" \
-  --foundation-model "anthropic.claude-3-5-sonnet-20241022-v2:0" \
+  --foundation-model "us.anthropic.claude-sonnet-4-5-20250929-v1:0" \
   --instruction "You are a helpful SQL assistant that converts natural language questions into SQL queries and executes them against a sales database. The database contains information about customers, products, orders, and order items. When a user asks a question: 1. First, get the database schema using the get-schema action to understand the available tables and columns 2. Convert the natural language question into a valid SQL SELECT query 3. Execute the query using the execute-query action 4. Present the results in a clear, human-readable format 5. If there's an error, explain what went wrong and suggest corrections. Always validate that your SQL queries are safe and only use SELECT statements. Never generate queries that modify data (INSERT, UPDATE, DELETE, DROP, etc.). Be conversational and helpful. If the user's question is ambiguous, ask for clarification." \
   --agent-resource-role-arn "$ROLE_ARN" \
   --idle-session-ttl-in-seconds 600 \

@@ -77,7 +77,7 @@
 ## 🏗️ Architecture Components
 
 ### AWS Services Used
-1. Amazon Bedrock (Claude 3.5 Sonnet)
+1. Amazon Bedrock (Claude Sonnet 4.5)
 2. RDS PostgreSQL
 3. Lambda (Python 3.11)
 4. API Gateway
@@ -119,7 +119,7 @@
 
 ### Core Features
 - ✅ Natural language query processing
-- ✅ SQL generation with Claude 3.5 Sonnet
+- ✅ SQL generation with Claude Sonnet 4.5
 - ✅ Query validation and sanitization
 - ✅ Database query execution
 - ✅ Error handling and logging
@@ -273,7 +273,7 @@
 - ✅ Extensive examples
 
 ### Innovation
-- ✅ Uses latest Claude 3.5 Sonnet
+- ✅ Uses latest Claude Sonnet 4.5
 - ✅ Bedrock Agents integration
 - ✅ Natural language interface
 - ✅ Automated SQL generation

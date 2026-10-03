@@ -1,6 +1,6 @@
 # Amazon Bedrock Text-to-SQL Agent POC
 
-A proof of concept demonstrating natural language to SQL conversion using an Amazon Bedrock Agent (Claude 3.5 Sonnet), querying sample sales data in S3 via Amazon Athena.
+A proof of concept demonstrating natural language to SQL conversion using an Amazon Bedrock Agent (Claude Sonnet 4.5), querying sample sales data in S3 via Amazon Athena.
 
 > **👉 New to this project? Start here: [START_HERE.md](docs/START_HERE.md)**
 
@@ -19,7 +19,7 @@ The system automatically:
 
 ## ✨ Features
 
-- **Natural Language Processing**: Powered by Claude 3.5 Sonnet
+- **Natural Language Processing**: Powered by Claude Sonnet 4.5
 - **Secure Query Execution**: Only SELECT queries allowed, dangerous-keyword blocking
 - **Serverless Analytics**: Athena over S3 — no database server to run or patch
 - **Modern UI**: Clean React interface with example queries
@@ -33,7 +33,7 @@ React Frontend → API Gateway → API Lambda → Bedrock Agent → Query Lambda
 ```
 
 **Key Components**:
-- **Bedrock Agent**: Claude 3.5 Sonnet for NL understanding and SQL generation
+- **Bedrock Agent**: Claude Sonnet 4.5 for NL understanding and SQL generation
 - **Amazon Athena + AWS Glue**: Serverless SQL over CSV sample data in S3 (4 external tables)
 - **Lambda Functions**: Athena query execution and API handling
 - **React Frontend**: Simple chat interface
@@ -73,7 +73,7 @@ bedrock-text-to-sql/
 - AWS Account with Bedrock access
 - AWS CLI configured
 - Node.js 18+ and Python 3.11+
-- Claude 3.5 Sonnet enabled in Bedrock
+- Claude Sonnet 4.5 enabled in Bedrock
 
 ### Installation
 
@@ -183,7 +183,7 @@ Idle cost is effectively **$0** — you only pay when you query.
 ## 🛠️ Troubleshooting
 
 **Common Issues**:
-- Bedrock model not found → Enable Claude 3.5 Sonnet access
+- Bedrock model not found → Enable Claude Sonnet 4.5 access
 - Database connection failed → Wait 2-3 min after deployment
 - CORS error → Check API endpoint in `.env`
 
@@ -234,4 +234,4 @@ MIT License - feel free to use this for your projects!
 - [Amazon Bedrock Documentation](https://docs.aws.amazon.com/bedrock/)
 - [Bedrock Agents Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html)
 - [AWS CDK Documentation](https://docs.aws.amazon.com/cdk/)
-- [Claude 3.5 Sonnet](https://www.anthropic.com/claude)
+- [Claude Sonnet 4.5](https://www.anthropic.com/claude)

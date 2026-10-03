@@ -72,7 +72,7 @@ Before starting, ensure you have:
 - [ ] AWS CLI installed and configured
 - [ ] Node.js 18+ installed
 - [ ] Python 3.11+ installed
-- [ ] Bedrock access to Claude 3.5 Sonnet
+- [ ] Bedrock access to Claude Sonnet 4.5
 - [ ] 20-30 minutes of time
 
 **Don't have these?** → See [PREREQUISITES.md](PREREQUISITES.md)
@@ -86,7 +86,7 @@ This project creates:
 - ✅ RDS PostgreSQL database
 - ✅ Lambda functions (Python)
 - ✅ API Gateway REST API
-- ✅ Bedrock Agent with Claude 3.5 Sonnet
+- ✅ Bedrock Agent with Claude Sonnet 4.5
 
 ### Application
 - ✅ React web interface
@@ -227,7 +227,7 @@ Once deployed, try:
 ## 🚨 Important Notes
 
 ### Before Deployment
-1. ⚠️ Enable Bedrock access to Claude 3.5 Sonnet in AWS Console
+1. ⚠️ Enable Bedrock access to Claude Sonnet 4.5 in AWS Console
 2. ⚠️ Use a supported region (us-east-1, us-west-2, etc.)
 3. ⚠️ Ensure you have admin permissions
 4. ⚠️ Budget for ~$50/month if left running
@@ -256,7 +256,7 @@ Once deployed, try:
 
 | Issue | Solution |
 |-------|----------|
-| Bedrock model not found | Enable Claude 3.5 Sonnet in console |
+| Bedrock model not found | Enable Claude Sonnet 4.5 in console |
 | Database connection failed | Wait 2-3 min after deployment |
 | CORS error | Check API endpoint in .env |
 | Agent not responding | Check CloudWatch logs |
@@ -332,7 +332,7 @@ By deploying this project, you'll learn:
 - **Natural Language**: Ask questions in plain English
 - **Secure**: Only SELECT queries, SQL injection protection
 - **Fast**: Responses in < 10 seconds
-- **Smart**: Claude 3.5 Sonnet understands context
+- **Smart**: Claude Sonnet 4.5 understands context
 - **Complete**: Full stack from database to UI
 - **Security patterns**: S3 encryption, scoped IAM roles, SELECT-only validation
 

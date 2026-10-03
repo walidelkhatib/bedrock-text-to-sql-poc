@@ -15,7 +15,7 @@ Use this checklist to ensure a smooth deployment of the Bedrock Text-to-SQL Agen
 
 ### AWS Setup
 - [ ] Bedrock access enabled in AWS Console
-- [ ] Claude 3.5 Sonnet v2 access granted
+- [ ] Claude Sonnet 4.5 access granted
 - [ ] Using supported region (us-east-1, us-west-2, etc.)
 - [ ] IAM permissions verified (AdministratorAccess or equivalent)
 - [ ] CDK bootstrapped (`cdk bootstrap`)
@@ -79,7 +79,7 @@ Use this checklist to ensure a smooth deployment of the Bedrock Text-to-SQL Agen
 **Expected time**: 2 minutes
 
 **Troubleshooting**:
-- If model not found: Enable Claude 3.5 Sonnet in Bedrock console
+- If model not found: Enable Claude Sonnet 4.5 in Bedrock console
 - If permission error: Check Bedrock IAM permissions
 - If agent exists: Delete old agent first
 

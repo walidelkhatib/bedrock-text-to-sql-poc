@@ -165,7 +165,7 @@ Download from: https://git-scm.com/
 
 ## AWS Bedrock Setup
 
-### Enable Claude 3.5 Sonnet Access
+### Enable Claude Sonnet 4.5 Access
 
 This is **REQUIRED** before deployment!
 
@@ -178,7 +178,7 @@ This is **REQUIRED** before deployment!
 4. **Request Access**:
    - Click "Manage model access"
    - Find "Anthropic" section
-   - Check "Claude 3.5 Sonnet v2"
+   - Check "Claude Sonnet 4.5"
    - Click "Request model access"
 5. **Wait for Approval**:
    - Usually instant
@@ -188,12 +188,12 @@ This is **REQUIRED** before deployment!
 ```bash
 aws bedrock list-foundation-models \
   --region us-east-1 \
-  --query "modelSummaries[?contains(modelId, 'claude-3-5-sonnet')]"
+  --query "modelSummaries[?contains(modelId, 'claude-sonnet-4-5')]"
 ```
 
 ### Supported Regions
 
-Bedrock with Claude 3.5 Sonnet is available in:
+Bedrock with Claude Sonnet 4.5 is available in:
 - `us-east-1` (US East - N. Virginia) ✅ Recommended
 - `us-west-2` (US West - Oregon)
 - `eu-west-1` (Europe - Ireland)
@@ -282,7 +282,7 @@ Before proceeding with deployment, verify:
 - [ ] Python 3.11+ installed
 - [ ] AWS CDK installed globally
 - [ ] CDK bootstrapped in your account/region
-- [ ] Bedrock access to Claude 3.5 Sonnet enabled
+- [ ] Bedrock access to Claude Sonnet 4.5 enabled
 - [ ] Using a supported region (us-east-1 recommended)
 - [ ] IAM permissions sufficient
 

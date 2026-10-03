@@ -8,13 +8,13 @@ Get the Bedrock Text-to-SQL Agent running in under 30 minutes.
 - [ ] AWS CLI installed and configured (`aws configure`)
 - [ ] Node.js 18+ installed (`node --version`)
 - [ ] Python 3.11+ installed (`python3 --version`)
-- [ ] Bedrock access to Claude 3.5 Sonnet (see below)
+- [ ] Bedrock access to Claude Sonnet 4.5 (see below)
 
 ### Enable Bedrock Model Access
 
 1. Go to AWS Console → Amazon Bedrock → Model access
 2. Click "Manage model access"
-3. Select "Claude 3.5 Sonnet v2"
+3. Select "Claude Sonnet 4.5"
 4. Click "Request model access"
 5. Wait for approval (usually instant)
 
@@ -94,7 +94,7 @@ Try these queries in the web interface:
 ## Troubleshooting
 
 ### "Bedrock model not found"
-→ Enable Claude 3.5 Sonnet access in Bedrock console
+→ Enable Claude Sonnet 4.5 access in Bedrock console
 
 ### "Database connection failed"
 → Wait 2-3 minutes for RDS to fully initialize after deployment

@@ -17,7 +17,7 @@
 ┌─────────────┐      ┌──────────────┐
 │ API Lambda  │─────▶│   Bedrock    │
 │  Function   │      │    Agent     │
-└─────────────┘      │ (Claude 3.5) │
+└─────────────┘      │ (Sonnet 4.5) │
                      └──────┬───────┘
                             │
                             ▼
@@ -58,7 +58,7 @@
 - Handles streaming responses
 - Returns formatted results
 
-### 4. Bedrock Agent (Claude 3.5 Sonnet)
+### 4. Bedrock Agent (Claude Sonnet 4.5)
 - Natural language understanding
 - SQL query generation
 - Action orchestration
@@ -133,7 +133,7 @@
 ## Bedrock Agent Configuration
 
 ### Foundation Model
-- Claude 3.5 Sonnet v2 (anthropic.claude-3-5-sonnet-20241022-v2:0)
+- Claude Sonnet 4.5 (us.anthropic.claude-sonnet-4-5-20250929-v1:0)
 
 ### Action Group: DatabaseActions
 - **get-schema**: Returns database schema

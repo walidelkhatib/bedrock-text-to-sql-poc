@@ -16,7 +16,7 @@ This is a complete proof of concept for a **Bedrock Text-to-SQL Agent** that con
 - ✅ Secrets Manager for database credentials
 
 ### Bedrock Agent
-- ✅ Claude 3.5 Sonnet v2 integration
+- ✅ Claude Sonnet 4.5 integration
 - ✅ Action group for database operations
 - ✅ OpenAPI schema for agent actions
 - ✅ Natural language to SQL conversion
@@ -95,7 +95,7 @@ This is a complete proof of concept for a **Bedrock Text-to-SQL Agent** that con
 
 | Component | Technology |
 |-----------|-----------|
-| AI Model | Claude 3.5 Sonnet v2 |
+| AI Model | Claude Sonnet 4.5 |
 | Agent Framework | Amazon Bedrock Agents |
 | Database | PostgreSQL 15.4 |
 | Compute | AWS Lambda (Python 3.11) |
@@ -387,7 +387,7 @@ bedrock-text-to-sql/
 - [RDS PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)
 
 ### External Resources
-- [Claude 3.5 Sonnet](https://www.anthropic.com/claude)
+- [Claude Sonnet 4.5](https://www.anthropic.com/claude)
 - [React Documentation](https://react.dev/)
 - [PostgreSQL Documentation](https://www.postgresql.org/docs/)
 
@@ -405,4 +405,4 @@ MIT License - Free to use and modify for your projects!
 
 ---
 
-**Built with ❤️ using Amazon Bedrock, Claude 3.5 Sonnet, and AWS CDK**
+**Built with ❤️ using Amazon Bedrock, Claude Sonnet 4.5, and AWS CDK**

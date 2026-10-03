@@ -233,9 +233,15 @@ export class BedrockTextToSqlStack extends cdk.Stack {
       description: 'Role for Bedrock Agent to invoke Lambda',
     });
 
+    // Claude Sonnet 4.5 is accessed via a cross-region inference profile, so the
+    // agent role needs InvokeModel on BOTH the inference profile and the
+    // underlying regional foundation-model ARNs it can route to.
     bedrockAgentRole.addToPolicy(new iam.PolicyStatement({
-      actions: ['bedrock:InvokeModel'],
-      resources: [`arn:aws:bedrock:${this.region}::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0`],
+      actions: ['bedrock:InvokeModel', 'bedrock:InvokeModelWithResponseStream'],
+      resources: [
+        `arn:aws:bedrock:${this.region}:${this.account}:inference-profile/us.anthropic.claude-sonnet-4-5-20250929-v1:0`,
+        `arn:aws:bedrock:*::foundation-model/anthropic.claude-sonnet-4-5-20250929-v1:0`,
+      ],
     }));
 
     queryExecutionLambda.grantInvoke(bedrockAgentRole);

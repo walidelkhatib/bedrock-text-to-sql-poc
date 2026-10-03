@@ -8,7 +8,7 @@ This guide walks you through deploying the Bedrock Text-to-SQL Agent POC.
    - CloudFormation
    - VPC, RDS, Lambda
    - API Gateway
-   - Bedrock (with Claude 3.5 Sonnet access)
+   - Bedrock (with Claude Sonnet 4.5 access)
    - IAM, Secrets Manager
 
 2. AWS CLI configured with credentials:
@@ -20,9 +20,9 @@ This guide walks you through deploying the Bedrock Text-to-SQL Agent POC.
 
 4. Python 3.11+ and pip installed
 
-5. Request access to Claude 3.5 Sonnet in Bedrock:
+5. Request access to Claude Sonnet 4.5 in Bedrock:
    - Go to AWS Console → Bedrock → Model access
-   - Request access to "Claude 3.5 Sonnet v2"
+   - Request access to "Claude Sonnet 4.5"
 
 ## Step 1: Build Lambda Layer
 
@@ -75,7 +75,7 @@ chmod +x setup-bedrock-agent.sh
 ```
 
 This script will:
-- Create the Bedrock Agent with Claude 3.5 Sonnet
+- Create the Bedrock Agent with Claude Sonnet 4.5
 - Configure the action group with Lambda integration
 - Create an agent alias
 - Set up permissions
@@ -126,7 +126,7 @@ Try these example queries:
 ## Troubleshooting
 
 ### Bedrock Access Issues
-- Ensure you have requested and been granted access to Claude 3.5 Sonnet in the Bedrock console
+- Ensure you have requested and been granted access to Claude Sonnet 4.5 in the Bedrock console
 - Check that your region supports Bedrock (us-east-1, us-west-2 recommended)
 
 ### Database Connection Issues
