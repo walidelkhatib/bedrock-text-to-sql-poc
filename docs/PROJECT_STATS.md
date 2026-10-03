@@ -4,7 +4,7 @@
 
 **Project Name**: Amazon Bedrock Text-to-SQL Agent POC
 **Version**: 1.0.0
-**Status**: Production-Ready
+**Status**: POC — complete
 **License**: MIT
 
 ## 📁 File Count
@@ -265,7 +265,7 @@
 
 ### Strengths
 - ✅ Complete end-to-end solution
-- ✅ Production-ready architecture
+- ✅ Clean, well-structured architecture
 - ✅ Comprehensive documentation
 - ✅ Security-first design
 - ✅ Easy to deploy
@@ -305,7 +305,7 @@
 ### Business Success
 - ✅ Cost-effective (~$50/month)
 - ✅ Scalable architecture
-- ✅ Production-ready
+- ✅ Demonstrates production patterns
 - ✅ Extensible design
 
 ## 🔮 Future Enhancements
@@ -353,7 +353,7 @@
 ## 🏆 Project Achievements
 
 - ✅ Complete working POC
-- ✅ Production-ready code
+- ✅ Clean, well-structured code
 - ✅ Comprehensive documentation (4,500+ lines)
 - ✅ 100+ example queries
 - ✅ Security best practices
@@ -383,7 +383,7 @@
 
 ---
 
-**Project Status**: ✅ Complete and Production-Ready
+**Project Status**: ✅ Complete (POC)
 
 **Last Updated**: January 2026
 

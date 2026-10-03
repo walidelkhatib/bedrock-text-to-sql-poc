@@ -4,7 +4,7 @@ Welcome to the **Amazon Bedrock Text-to-SQL Agent** proof of concept!
 
 ## What Is This?
 
-This is a complete, production-ready system that lets you ask questions about your database in plain English and get instant answers. No SQL knowledge required!
+This is a complete demo system that lets you ask questions about your database in plain English and get instant answers. No SQL knowledge required!
 
 **Example**:
 - You ask: "How many customers do we have?"
@@ -334,7 +334,7 @@ By deploying this project, you'll learn:
 - **Fast**: Responses in < 10 seconds
 - **Smart**: Claude 3.5 Sonnet understands context
 - **Complete**: Full stack from database to UI
-- **Production-Ready**: VPC, encryption, IAM roles
+- **Security patterns**: S3 encryption, scoped IAM roles, SELECT-only validation
 
 ## 📞 Support
 

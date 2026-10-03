@@ -25,11 +25,17 @@
                      │Query Exec    │
                      │Lambda        │
                      └──────┬───────┘
-                            │
+                            │ Athena SQL
                             ▼
                      ┌──────────────┐
-                     │     RDS      │
-                     │  PostgreSQL  │
+                     │ Amazon Athena│
+                     │  + AWS Glue  │
+                     └──────┬───────┘
+                            │ reads
+                            ▼
+                     ┌──────────────┐
+                     │   S3 Bucket  │
+                     │ (CSV tables) │
                      └──────────────┘
 ```
 
@@ -61,41 +67,35 @@
 ### 5. Query Execution Lambda
 - Receives SQL from Bedrock Agent
 - Validates queries (SELECT only)
-- Executes against RDS
-- Returns results to agent
-- Provides schema information
+- Runs the query through Athena
+- Returns results to the agent
+- Provides schema information from the Glue Data Catalog
 
-### 6. RDS PostgreSQL
-- Sales database
-- Sample data (customers, products, orders)
-- Isolated in private subnet
-- Encrypted at rest
+### 6. Amazon Athena + AWS Glue + S3
+- Serverless SQL engine (Athena) over CSV sample data in S3
+- Glue Data Catalog defines 4 external tables (customers, products, orders, order_items)
+- No database server to provision, patch, or pay for while idle
+- Athena query results written to a separate encrypted S3 bucket (7-day lifecycle)
+
+> **Alternate reference path**: `lambda/functions/query_execution.py` is an RDS
+> PostgreSQL handler kept as a reference implementation. It is **not** deployed by
+> the current CDK stack, which wires `athena_query_execution.py` instead.
 
 ## Security Features
-
-### Network Security
-- VPC with isolated subnets
-- RDS in private subnet (no internet access)
-- Lambda in private subnet with NAT Gateway
-- Security groups restrict access
 
 ### Query Validation
 - Only SELECT statements allowed
 - Blocks dangerous keywords (DROP, DELETE, etc.)
-- Prevents SQL injection
 - Single statement enforcement
 
-### IAM & Secrets
-- Least privilege IAM roles
-- Database credentials in Secrets Manager
-- Bedrock agent execution role
-- Lambda execution roles
+### IAM
+- Least privilege IAM roles (Athena, Glue, S3 scoped to this stack's resources)
+- Separate roles for the Bedrock Agent, Query Lambda, and API Lambda
 
 ### Data Protection
-- RDS encryption at rest
-- Secrets Manager encryption
+- S3 encryption at rest (SSE-S3) for data and Athena results
 - HTTPS for API calls
-- VPC endpoint support
+- Data lives in a private S3 bucket, reachable only through Athena
 
 ## Data Flow
 
@@ -107,14 +107,14 @@
 4. API Lambda calls Bedrock Agent with query
 5. Bedrock Agent:
    - Analyzes the question
-   - Calls get-schema action if needed
+   - Calls get-schema action if needed (reads Glue Data Catalog)
    - Generates SQL query
    - Calls execute-query action
 6. Query Execution Lambda:
    - Validates SQL query
-   - Connects to RDS via Secrets Manager
-   - Executes query
-   - Returns results
+   - Submits it to Athena against the Glue database
+   - Polls for completion and fetches results from S3
+   - Returns results to the agent
 7. Bedrock Agent formats results naturally
 8. API Lambda returns response to frontend
 9. Frontend displays results to user
@@ -185,16 +185,17 @@ The agent is instructed to:
 
 ## Cost Optimization
 
-### Current Costs
-- RDS: ~$15/month (t3.micro)
-- NAT Gateway: ~$30/month
-- Lambda: Pay per invocation
-- Bedrock: Pay per token
-- API Gateway: Pay per request
+### Current Costs (serverless, pay-per-use)
+- Athena: ~$5 per TB scanned (sample data is tiny — effectively free per query)
+- S3: negligible for the small sample dataset
+- Lambda: pay per invocation
+- Bedrock: pay per token
+- API Gateway: pay per request
+
+Idle cost is effectively $0 — there is no always-on RDS or NAT Gateway.
 
 ### Optimization Strategies
-- Use VPC endpoints instead of NAT Gateway
-- RDS instance scheduling
-- Lambda memory optimization
-- Query result caching
-- Aurora Serverless for variable load
+- Convert CSV to columnar Parquet to cut Athena bytes-scanned
+- Partition large tables to prune scans
+- Cache frequent query results
+- Right-size Lambda memory

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a complete, production-ready proof of concept for a **Bedrock Text-to-SQL Agent** that converts natural language questions into SQL queries and executes them against a PostgreSQL database.
+This is a complete proof of concept for a **Bedrock Text-to-SQL Agent** that converts natural language questions into SQL queries and executes them against sample sales data in S3 via Amazon Athena.
 
 ## What's Included
 

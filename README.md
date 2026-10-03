@@ -1,6 +1,6 @@
 # Amazon Bedrock Text-to-SQL Agent POC
 
-A production-ready proof of concept demonstrating natural language to SQL conversion using Amazon Bedrock Agent with Claude 3.5 Sonnet, connected to RDS PostgreSQL with sample sales data.
+A proof of concept demonstrating natural language to SQL conversion using an Amazon Bedrock Agent (Claude 3.5 Sonnet), querying sample sales data in S3 via Amazon Athena.
 
 > **👉 New to this project? Start here: [START_HERE.md](docs/START_HERE.md)**
 
@@ -13,31 +13,35 @@ Ask questions in plain English, get SQL results instantly:
 
 The system automatically:
 1. Converts your question to SQL
-2. Validates the query for safety
-3. Executes against PostgreSQL
+2. Validates the query for safety (SELECT-only)
+3. Executes against the sales data via Athena
 4. Returns formatted results
 
 ## ✨ Features
 
 - **Natural Language Processing**: Powered by Claude 3.5 Sonnet
-- **Secure Query Execution**: Only SELECT queries allowed, SQL injection protection
-- **Real-time Results**: Fast query execution with error handling
+- **Secure Query Execution**: Only SELECT queries allowed, dangerous-keyword blocking
+- **Serverless Analytics**: Athena over S3 — no database server to run or patch
 - **Modern UI**: Clean React interface with example queries
-- **Production-Ready**: VPC isolation, encrypted secrets, IAM roles
-- **Sample Data**: Pre-loaded sales database with customers, products, orders
+- **Security Patterns**: Scoped IAM roles, S3 encryption, SELECT-only validation
+- **Sample Data**: Pre-loaded sales dataset (customers, products, orders, order_items)
 
 ## 🏗️ Architecture
 
 ```
-React Frontend → API Gateway → Lambda → Bedrock Agent → Query Lambda → RDS PostgreSQL
+React Frontend → API Gateway → API Lambda → Bedrock Agent → Query Lambda → Athena → S3 (Glue tables)
 ```
 
 **Key Components**:
-- **Bedrock Agent**: Claude 3.5 Sonnet for NL understanding
-- **RDS PostgreSQL**: Sample sales database in private subnet
-- **Lambda Functions**: Query execution and API handling
+- **Bedrock Agent**: Claude 3.5 Sonnet for NL understanding and SQL generation
+- **Amazon Athena + AWS Glue**: Serverless SQL over CSV sample data in S3 (4 external tables)
+- **Lambda Functions**: Athena query execution and API handling
 - **React Frontend**: Simple chat interface
-- **CDK**: Infrastructure as Code
+- **CDK**: Infrastructure as Code (TypeScript)
+
+> **Note**: This POC uses Athena/Glue over S3 as the query engine. The repo also
+> includes an alternate RDS PostgreSQL query handler (`lambda/functions/query_execution.py`)
+> as a reference implementation — it is **not** wired into the deployed CDK stack.
 
 [See detailed architecture →](ARCHITECTURE.md)
 
@@ -74,29 +78,31 @@ bedrock-text-to-sql/
 ### Installation
 
 ```bash
-# 1. Build Lambda dependencies
+# 1. Build Lambda dependencies (if needed)
 ./scripts/build-lambda-layer.sh
 
-# 2. Deploy infrastructure (10-15 min)
+# 2. Deploy infrastructure (S3, Glue tables, Athena, Lambdas, API Gateway)
+#    Sample CSV data is uploaded to S3 automatically by the stack.
 cd infrastructure
 npm install && npm run deploy
 
-# 3. Seed database
-npm run seed-database
-
-# 4. Create Bedrock Agent
+# 3. Create Bedrock Agent and point it at the Query Lambda
 cd ../scripts
 ./setup-bedrock-agent.sh
 
-# 5. Update API Lambda with Agent ID
+# 4. Update API Lambda with the Agent ID + Alias ID
 ./update-lambda-env.sh <AGENT_ID> <ALIAS_ID>
 
-# 6. Launch frontend
+# 5. Launch frontend
 cd ../frontend
 npm install
 echo "REACT_APP_API_ENDPOINT=<API_URL>" > .env
 npm start
 ```
+
+> **Heads up**: Steps 3–4 are manual — the Bedrock Agent is created out-of-band
+> (not by the CDK stack), and the API Lambda ships with placeholder Agent IDs
+> until you run `update-lambda-env.sh`. This is a POC, not a one-command deploy.
 
 ## 📚 Documentation
 
@@ -110,11 +116,11 @@ npm start
 ## 🔒 Security Features
 
 - **Query Validation**: Only SELECT statements allowed
-- **SQL Injection Protection**: Parameterized queries and keyword blocking
-- **Network Isolation**: RDS in private subnet, no internet access
-- **Encrypted Secrets**: Database credentials in Secrets Manager
-- **IAM Roles**: Least privilege access for all components
-- **VPC Security Groups**: Restricted network access
+- **Dangerous-Keyword Blocking**: DROP/DELETE/INSERT/UPDATE/ALTER/etc. rejected
+- **Single-Statement Enforcement**: Multiple statements blocked
+- **Encrypted Storage**: S3 data and Athena results encrypted (SSE-S3)
+- **IAM Roles**: Scoped least-privilege access for all components (Athena, Glue, S3)
+- **No Public Data Store**: Data lives in a private S3 bucket, queried only via Athena
 
 ## 💡 Example Queries
 
@@ -155,16 +161,17 @@ aws bedrock-agent-runtime invoke-agent \
 
 ## 💰 Cost Estimate
 
-**Development/Testing**: $2-5 per day
-**Idle**: $1-2 per day
+This is a serverless, pay-per-use stack with **no always-on compute** (no RDS, no NAT Gateway):
 
-Main costs:
-- RDS t3.micro: ~$0.50/day
-- NAT Gateway: ~$1/day  
-- Lambda: Pay per use
-- Bedrock: ~$0.003 per 1K tokens
+- **Athena**: ~$5 per TB scanned (sample data is tiny — fractions of a cent per query)
+- **S3**: Negligible for the small sample dataset
+- **Lambda**: Pay per invocation
+- **Bedrock**: ~$0.003 per 1K tokens
+- **API Gateway**: Pay per request
 
-**Tip**: Run `./scripts/cleanup.sh` when not in use!
+Idle cost is effectively **$0** — you only pay when you query.
+
+**Tip**: Run `./scripts/cleanup.sh` to tear down the stack when done.
 
 ## 🧹 Cleanup
 
@@ -184,12 +191,13 @@ Main costs:
 
 ## 📊 Database Schema
 
+Sample data is stored as CSV in S3 and exposed as AWS Glue external tables, queried via Athena:
+
 **Tables**:
-- `customers` - Customer information (10 sample records)
-- `products` - Product catalog (10 sample records)
-- `orders` - Order headers (10 sample records)
+- `customers` - Customer information
+- `products` - Product catalog
+- `orders` - Order headers
 - `order_items` - Order line items
-- `sales_summary` - Denormalized view for analytics
 
 ## 🔧 Customization
 
